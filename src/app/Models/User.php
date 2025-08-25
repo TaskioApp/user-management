@@ -5,17 +5,26 @@ namespace Taskio\UserManagement\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
-class UserManagement extends Authenticatable
+class User extends Authenticatable
 {
     use HasRoles;
-    
+
     /**
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
+        'mobile',
         'password',
+        'first_name',
+        'last_name',
+        'avatar',
+        'socket_id',
+        'banned_at',
+        'activated_at',
+        'email_verified_at',
+        'last_logged_in_at'
     ];
 
     /**
