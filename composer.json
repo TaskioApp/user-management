@@ -1,0 +1,44 @@
+{
+    "name": "taskio/user-management",
+    "description": "",
+    "version": "1.0.0",
+    "type": "module",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "artisan",
+        "user management",
+        "clean architecture"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Taskio\\UserManagement\\": "src/app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Arash Taghavi",
+            "email": "arash.taghavi69@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "spatie/laravel-permission":"*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "homepage": "https://github.com/taskio/user-management",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/taskio/user-management"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Taskio\\UserManagement\\Providers\\UserManagementServiceProvider"
+            ]
+        }
+    }
+}
