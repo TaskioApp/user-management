@@ -1,0 +1,12 @@
+<?php
+
+namespace Taskio\UserManagement\Interfaces;
+
+interface RepositoryInterface
+{
+    public function index(array $request);
+    public function get(int $id);
+    public function store(array $request);
+    public function update(array $request, int $id);
+    public function destroy(int $id);
+}
