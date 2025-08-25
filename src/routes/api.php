@@ -8,4 +8,5 @@ Route::prefix('user-managements')->group(function () {
     Route::post('', 'store');
     Route::put('{id}', 'update');
     Route::delete('{id}', 'destroy');
+    Route::patch('{id}', 'toggleBan');
 });

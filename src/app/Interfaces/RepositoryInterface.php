@@ -9,4 +9,6 @@ interface RepositoryInterface
     public function store(array $request);
     public function update(array $request, int $id);
     public function destroy(int $id);
+    public function ban(int $id);
+    public function unban(int $id);
 }
