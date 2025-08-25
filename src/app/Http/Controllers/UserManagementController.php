@@ -47,4 +47,11 @@ class UserManagementController extends Controller
 
         return new UserManagementResource($user);
     }
+
+    public function toggleBan(int $id)
+    {
+        $user = $this->userManagementService->toggleBan($id);
+
+        return new UserManagementResource($user);
+    }
 }

@@ -79,4 +79,24 @@ class UserManagementService
             throw $throwable;
         }
     }
+
+    public function toggleBan(int $id): User
+    {
+        DB::beginTransaction();
+        try {
+            $user = $this->repository->get($id);
+
+            if (empty($user->banned_at)) {
+                $this->repository->ban($user->id);
+            } else {
+                $this->repository->unban($user->id);
+            }
+
+            DB::commit();
+            return $this->repository->get($id);
+        } catch (Throwable $throwable) {
+            DB::rollBack();
+            throw $throwable;
+        }
+    }
 }

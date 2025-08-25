@@ -2,12 +2,14 @@
 
 namespace Taskio\UserManagement\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasRoles;
+    use HasRoles, SoftDeletes;
 
     /**
      * @var list<string>
@@ -31,8 +33,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password'
     ];
 
     /**
@@ -44,5 +45,24 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function scopeSearch(Builder $builder, array $params): Builder
+    {
+        $username = $params['username'] ?? null;
+        $email = $params['email'] ?? null;
+        $mobile = $params['mobile'] ?? null;
+        $firstName = $params['first_name'] ?? null;
+        $lastName = $params['last_name'] ?? null;
+        $withTrashed = $params['with_trashed'] ?? null;
+
+        $builder->when($username, fn(Builder $builder, $value) => $builder->where('username', $value));
+        $builder->when($email, fn(Builder $builder, $value) => $builder->where('email', $value));
+        $builder->when($mobile, fn(Builder $builder, $value) => $builder->where('mobile', $value));
+        $builder->when($firstName, fn(Builder $builder, $value) => $builder->where('first_name', 'like', "%$value%"));
+        $builder->when($lastName, fn(Builder $builder, $value) => $builder->where('last_name', 'like', "%$value%"));
+        $builder->when($withTrashed, fn(Builder $builder, $value) => $builder->withTrashed());
+
+        return $builder;
     }
 }
