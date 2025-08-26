@@ -2,14 +2,17 @@
 
 namespace Taskio\UserManagement\Models;
 
+use Dom\Attr;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasRoles, SoftDeletes;
+    use HasRoles, SoftDeletes, HasApiTokens;
 
     /**
      * @var list<string>
@@ -65,4 +68,8 @@ class User extends Authenticatable
 
         return $builder;
     }
+
+    public function isActive() {}
+
+    public function isBan() {}
 }

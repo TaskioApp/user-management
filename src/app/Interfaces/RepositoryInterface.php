@@ -11,4 +11,5 @@ interface RepositoryInterface
     public function destroy(int $id);
     public function ban(int $id);
     public function unban(int $id);
+    public function getByUsername(string $username);
 }

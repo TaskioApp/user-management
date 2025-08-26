@@ -99,4 +99,9 @@ class UserManagementService
             throw $throwable;
         }
     }
+
+    public function getByUsername(string $username): User
+    {
+        return $this->repository->getByUsername($username);
+    }
 }

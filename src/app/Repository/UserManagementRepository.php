@@ -44,4 +44,9 @@ class UserManagementRepository implements RepositoryInterface
     {
         User::where('id', $id)->update(['banned_at' => null]);
     }
+
+    public function getByUsername(string $username)
+    {
+        return User::where('username', $username)->orWhere('email', $username)->orWhere('mobile', $username)->firstOrFail();
+    }
 }
