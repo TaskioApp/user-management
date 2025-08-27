@@ -47,6 +47,6 @@ class UserManagementRepository implements RepositoryInterface
 
     public function getByUsername(string $username)
     {
-        return User::where('username', $username)->orWhere('email', $username)->orWhere('mobile', $username)->firstOrFail();
+        return User::where('username', $username)->orWhere('email', $username)->orWhere('mobile', $username)->first();
     }
 }

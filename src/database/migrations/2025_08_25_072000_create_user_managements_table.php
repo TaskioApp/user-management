@@ -10,7 +10,7 @@ class CreateUserManagementsTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('username', 50)->unique();
+            $table->string('username', 50)->unique()->nullable();
             $table->string('email', 100)->unique()->nullable();
             $table->string('mobile', 20)->unique()->nullable();
             $table->string('password')->nullable();

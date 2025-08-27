@@ -100,7 +100,7 @@ class UserManagementService
         }
     }
 
-    public function getByUsername(string $username): User
+    public function getByUsername(string $username)
     {
         return $this->repository->getByUsername($username);
     }
