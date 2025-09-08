@@ -2,6 +2,7 @@
 
 namespace Taskio\UserManagement\Services;
 
+use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Taskio\FileUploader\Services\FileUploaderService;
@@ -103,5 +104,15 @@ class UserManagementService
     public function getByUsername(string $username)
     {
         return $this->repository->getByUsername($username);
+    }
+
+    public function getValidOtp(object $user, string $code): bool
+    {
+        return  $this->repository->getValidOtp($user, $code);
+    }
+
+    public function storeOtp(object $user, string $code)
+    {
+        return $this->repository->storeOtp($user, $code);
     }
 }

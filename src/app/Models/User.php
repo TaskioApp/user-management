@@ -2,9 +2,9 @@
 
 namespace Taskio\UserManagement\Models;
 
-use Dom\Attr;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
@@ -72,4 +72,14 @@ class User extends Authenticatable
     public function isActive() {}
 
     public function isBan() {}
+
+    public function otps(): HasMany
+    {
+        return $this->hasMany(Otp::class);
+    }
+
+    public function otp(): HasOne
+    {
+        return $this->hasOne(Otp::class)->notUsed()->notExpired();
+    }
 }

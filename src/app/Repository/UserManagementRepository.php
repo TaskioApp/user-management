@@ -5,6 +5,7 @@ namespace Taskio\UserManagement\Repository;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Taskio\UserManagement\Interfaces\RepositoryInterface;
+use Taskio\UserManagement\Models\Otp;
 use Taskio\UserManagement\Models\User;
 
 class UserManagementRepository implements RepositoryInterface
@@ -48,5 +49,15 @@ class UserManagementRepository implements RepositoryInterface
     public function getByUsername(string $username)
     {
         return User::where('username', $username)->orWhere('email', $username)->orWhere('mobile', $username)->first();
+    }
+
+    public function getValidOtp(object $user, string $code): bool
+    {
+        return $user->otp()->where('code', $code)->exists();
+    }
+
+    public function storeOtp(object $user, string $code): Otp
+    {
+        return $user->otp()->create(['code' => $code, 'expired_at' => Carbon::now()->addMinutes(5)]);
     }
 }
