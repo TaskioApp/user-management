@@ -51,7 +51,7 @@ class UserManagementRepository implements RepositoryInterface
         return User::where('username', $username)->orWhere('email', $username)->orWhere('mobile', $username)->first();
     }
 
-    public function getValidOtp(object $user, string $code): bool
+    public function checkValidOtp(object $user, string $code): bool
     {
         return $user->otp()->where('code', $code)->exists();
     }
@@ -59,5 +59,15 @@ class UserManagementRepository implements RepositoryInterface
     public function storeOtp(object $user, string $code): Otp
     {
         return $user->otp()->create(['code' => $code, 'expired_at' => Carbon::now()->addMinutes(5)]);
+    }
+
+    public function useOtp(object $user, string $code)
+    {
+        return $user->otp->update(['is_used', true]);
+    }
+
+    public function getValidOtp(object $user)
+    {
+        return $user->otp?->code;
     }
 }

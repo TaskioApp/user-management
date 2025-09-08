@@ -12,6 +12,8 @@ interface RepositoryInterface
     public function ban(int $id);
     public function unban(int $id);
     public function getByUsername(string $username);
-    public function getValidOtp(object $user, string $code): bool;
+    public function checkValidOtp(object $user, string $code): bool;
     public function storeOtp(object $user, string $code);
+    public function useOtp(object $user, string $code);
+    public function getValidOtp(object $user);
 }

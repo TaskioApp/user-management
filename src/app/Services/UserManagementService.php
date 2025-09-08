@@ -106,13 +106,23 @@ class UserManagementService
         return $this->repository->getByUsername($username);
     }
 
-    public function getValidOtp(object $user, string $code): bool
+    public function checkValidOtp(object $user, string $code): bool
     {
-        return  $this->repository->getValidOtp($user, $code);
+        return $this->repository->checkValidOtp($user, $code);
     }
 
     public function storeOtp(object $user, string $code)
     {
         return $this->repository->storeOtp($user, $code);
+    }
+
+    public function useOtp(object $user, string $code)
+    {
+        return $this->repository->useOtp($user, $code);
+    }
+
+    public function getValidOtp(object $user)
+    {
+        return $this->repository->getValidOtp($user);
     }
 }
